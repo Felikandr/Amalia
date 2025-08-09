@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Фан-клуб Ами Ами с эксклюзивным контентом и бонусами">
+    <meta property="og:title" content="Amalia-Goddes">
+    <meta property="og:image" content="https://i.postimg.cc/L8P7Yh0H/amalitext.png">
+    <title>Amalia-Goddes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Mantou+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        /* CSS Reset */
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* CSS Variables */
+        :root {
+            --dark-bg: #1a1a1a;
+            --card-bg: rgba(255, 46, 99, 0.2);
+            --border-pink: rgba(255, 46, 99, 0.3);
+            --crimson: #e63946;
+            --neon-violet: #DB2B4E;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Mantou Sans', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            position: relative;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 38px;
+            color: var(--crimson);
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10;
+        }
+
+        .menu-panel {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            transition: top 0.3s ease;
+            z-index: 9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-panel.active {
+            top: 0;
+        }
+
+        .menu-panel ul {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .menu-panel li {
+            margin: 15px 0;
+        }
+
+        .menu-panel a {
+            color: var(--crimson);
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--crimson);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .profile-pic img {
+            margin-top: 30px;
+            width: 100%;
+            max-width: none;
+            height: 750px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        .gallery-section,
+        #fanclub {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0;
+            background: #000;
+            position: relative;
+        }
+
+        h2 {
+            color: var(--crimson);
+            font-family: 'Lobster', cursive;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Fan Club Section */
+        #fanclub {
+            padding: 3rem 0;
+            background-color: #000;
+        }
+
+        .neon-text {
+            color: var(--crimson);
+            font-family: 'Lobster', cursive;
+            font-size: 22px;
+        }
+
+        .gothic-border {
+            position: relative;
+            display: inline-block;
+        }
+
+        .gothic-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--crimson), var(--neon-violet), var(--crimson), transparent);
+            box-shadow: 0 0 10px var(--crimson);
+        }
+
+        .fanclub-card {
+            background-color: var(--dark-bg);
+            border: 2px solid var(--crimson);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 10px auto;
+        }
+
+        .fanclub-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 10px rgba(220, 20, 60, 0.5);
+        }
+
+        .fanclub-card h3 {
+            font-family: 'Lobster', cursive;
+            font-size: 22px;
+            color: var(--crimson);
+            margin-bottom: 1rem;
+        }
+
+        .fanclub-card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .fanclub-card p span {
+            font-size: 14px;
+            font-weight: normal;
+            color: var(--neon-violet);
+        }
+
+        .fanclub-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .fanclub-card li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 0.75rem;
+        }
+
+        .fanclub-card li svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--crimson);
+        }
+
+        .fanclub-btn {
+            margin-top: auto;
+            background: var(--crimson);
+            color: #fff;
+            display: block;
+            text-align: center;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .fanclub-btn:hover {
+            background: #b01030;
+        }
+
+        /* Стили для вертикального слайдера */
+        .fanclub-slider {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .fanclub-slider .swiper-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fanclub-slider .swiper-button-next {
+            background-color: #DB2B4E;
+            color: white;
+            margin-top: 130px;
+            border-radius: 50%;
+            padding: 25px;
+            transform: rotate(90deg);
+        }
+
+        .fanclub-slider .swiper-pagination {
+            display: flex;
+            flex-direction: column;
+            right: 10px;
+            left: auto;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--neon-violet);
+            margin: 5px 0;
+        }
+
+        .swiper-button-next {
+            color: var(--neon-violet);
+        }
+
+        .swiper-slide {
+            flex-shrink: 0;
+            width: 100%;
+            height: auto;
+            position: relative;
+            transition-property: transform;
+            display: block;
+            max-width: 100%;
+        }
+
+        .relative .absolute {
+            background-color: var(--crimson);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            position: absolute;
+            top: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gallery-slider img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5%;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--crimson);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--crimson);
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+            padding: 1px;
+        }
+
+        .stat {
+            background-color: var(--dark-bg);
+            border: 2px solid var(--crimson);
+            border-radius: 40px;
+            width: 130px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(220, 20, 60, 0.5);
+        }
+
+        .numbers {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .caption {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ccc;
+        }
+
+        .social-logo {
+            margin-left: 2px;
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .fanclub-card {
+                margin: 3px auto;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            /* Gallery Slider */
+        .gallery-slider-mb img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5%;
+            cursor: pointer;
+        }
+
+            .profile-pic img {
+                 height: 350px;
+            }
+
+            .fanclub-card h3 {
+                font-size: 20px;
+            }
+
+            .fanclub-card p {
+                font-size: 24px;
+                text-align: left;
+            }
+
+            .fanclub-card ul {
+                text-align: left;
+            }
+
+            .fanclub-btn {
+                align-self: center;
+                width: 90%;
+                max-width: 200px;
+                padding: 10px 15px;
+            }
+
+            .fanclub-slider {
+                height: 400px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .fanclub-slider {
+                height: auto;
+            }
+
+            .fanclub-slider .swiper-wrapper {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .fanclub-slider .swiper-button-next {
+                display: none;
+            }
+
+            .fanclub-slider .swiper-pagination {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="menu-icon" aria-label="Открыть меню" onclick="toggleMenu()">≡</button>
+            <div class="profile-container">
+                <div class="profile-pic"><img src="https://i.postimg.cc/L8P7Yh0H/amalitext.png" alt="Ами Ами" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+            </div>
+        </header>
+
+        <nav class="menu-panel" id="menuPanel" aria-hidden="true">
+            <h2>Меню</h2>
+            <ul>
+                <li><a href="#fanclub" onclick="toggleMenu()">Фан-клуб</a></li>
+                <li><a href="#gallery" onclick="toggleMenu()">Галерея</a></li>
+            </ul>
+            <button class="menu-close" onclick="toggleMenu()" aria-label="Закрыть меню">✕</button>
+        </nav>
+
+        <section class="gallery-section" id="gallery">
+            <h2>Галерея Ами Ами</h2>
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/3J4fVdhg/1.jpg" alt="Изображение 1" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/kX0YmqML/2.jpg" alt="Изображение 2" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/Pqh6Cyw4/3.jpg" alt="Изображение 3" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/ZqcwpNPh/4.jpg" alt="Изображение 4" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/tTvDmHmS/5.jpg" alt="Изображение 5" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/y65vmsRW/6.jpg" alt="Изображение 6" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/MpJ5L5dS/7.jpg" alt="Изображение 7" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/Z5PHzNMy/8.jpg" alt="Изображение 8" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/85YBmmjx/9.jpg" alt="Изображение 9" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/J0B36HX0/11.jpg" alt="Изображение 11" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                    <div class="swiper-slide"><img src="https://i.postimg.cc/V5Qq3s9R/22.jpg" alt="Изображение 22" loading="lazy" onerror="this.src='fallback.jpg'"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            
+            <div class="modal" id="modal" role="dialog" aria-labelledby="modal-img">
+                <button class="modal-close" onclick="closeModal()" aria-label="Закрыть модальное окно">✕</button>
+                <img id="modal-img" src="" alt="Просмотр изображения">
+            </div>
+        </section>
+
+        <section id="fanclub" class="py-20 bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center neon-text mb-16 gothic-border pb-4">Поддержка <span class="text-pink-500">Ами Ами</span></h2>
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <p class="text-xl text-violet-200">Присоединяйся к моему эксклюзивному фан-клубу и получи доступ к уникальному контенту, ранним стримам, приватным чатам и многому другому!</p>
+                </div>
+                <div class="swiper fanclub-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide fanclub-card relative">
+                            <h3 class="text-2xl font-bold text-center mb-4">Начинающий 🔮</h3>
+                            <p>299₽<span>/месяц</span></p>
+                            <ul>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Значок в чате</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Доступ к архивным стримам</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Эмодзи в чате</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>12 мур голосовых в лс тг</span></li>
+                            </ul>
+                            <a href="https://boosty.to/amalia_g/purchase/3506086?ssource=DIRECT&share=subscription_link" class="fanclub-btn">Выбрать</a>
+                        </div>
+                        <div class="swiper-slide fanclub-card relative">
+                            <span class="absolute">Популярный</span>
+                            <h3 class="text-2xl font-bold text-center mb-4">Преданный 💎</h3>
+                            <p>799₽<span>/месяц</span></p>
+                            <ul>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Все из предыдущего уровня</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Доступ к приватным стримам</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Эксклюзивные ролики</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Доступ в закрытый Discord</span></li>
+                            </ul>
+                            <a href="https://boosty.to/amalia_g/purchase/3506095?ssource=DIRECT&share=subscription_link" class="fanclub-btn">Выбрать</a>
+                        </div>
+                        <div class="swiper-slide fanclub-card relative">
+                            <h3 class="text-2xl font-bold text-center mb-4">Божественный 👑</h3>
+                            <p>1499₽<span>/месяц</span></p>
+                            <ul>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Все из предыдущих уровней</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Персональные упоминания</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Эксклюзивные голосовые DM</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>Уникальные розыгрыши</span></li>
+                            </ul>
+                            <a href="https://boosty.to/amalia_g/purchase/3506100?ssource=DIRECT&share=subscription_link" class="fanclub-btn">Выбрать</a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="stats-container">
+                <div class="stat" data-platform="twitch" data-count="3600" data-url="http://twitch.tv/amalia_goddes">
+                    <div class="numbers">
+                        <span class="number">3.6 тыс</span>
+                        <span class="caption">Подписчиков</span>
+                    </div>
+                    <img src="https://i.postimg.cc/bYGKc6HD/twi.png" alt="Логотип Twitch" class="social-logo" loading="lazy" onerror="this.src='fallback.jpg'">
+                </div>
+                <div class="stat" data-platform="vk" data-count="67" data-url="https://vk.com/amaliagoddess">
+                    <div class="numbers">
+                        <span class="number">67</span>
+                        <span class="caption">Подписчиков</span>
+                    </div>
+                    <img src="https://i.postimg.cc/qRNZrRnV/vk.png" alt="Логотип VK" class="social-logo" loading="lazy" onerror="this.src='fallback.jpg'">
+                </div>
+                <div class="stat" data-platform="telegram" data-count="1100" data-url="https://t.me/joinchat/EU_2zgXqXQc2OTJi">
+                    <div class="numbers">
+                        <span class="number">1.1 тыс</span>
+                        <span class="caption">Подписчиков</span>
+                    </div>
+                    <img src="https://i.postimg.cc/Px0V5jzL/tg.png" alt="Логотип Telegram" class="social-logo" loading="lazy" onerror="this.src='fallback.jpg'">
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        (function () {
+            // Инициализация Swiper для галереи
+            const gallerySwiper = new Swiper('.gallery-slider', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                loop: true,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+
+            // Инициализация Swiper для фан-клуба с вертикальным направлением
+            const fanclubSwiper = new Swiper('.fanclub-slider', {
+                direction: 'vertical',
+                slidesPerView: 1,
+                spaceBetween: 16,
+                centeredSlides: true,
+                autoHeight: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: null,
+                },
+                loop: true,
+                speed: 500,
+                breakpoints: {
+                    768: {
+                        direction: 'horizontal',
+                        slidesPerView: 3,
+                        centeredSlides: false,
+                        spaceBetween: 30,
+                        pagination: { enabled: false },
+                        navigation: { enabled: false },
+                    },
+                },
+            });
+
+            // Модальное окно для галереи
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            const galleryImages = document.querySelectorAll('.gallery-slider img');
+
+            if (modal && modalImg && galleryImages.length) {
+                galleryImages.forEach(img => {
+                    img.addEventListener('click', () => {
+                        modal.style.display = 'flex';
+                        modalImg.src = img.src;
+                        modalImg.alt = img.alt;
+                        trapFocus(modal);
+                    });
+                    img.addEventListener('error', () => {
+                        img.src = 'fallback.jpg';
+                        console.warn(`Failed to load image: ${img.src}`);
+                    });
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal || e.target.classList.contains('modal-close')) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Меню
+            const menuPanel = document.getElementById('menuPanel');
+            if (menuPanel) {
+                window.toggleMenu = function () {
+                    const isActive = menuPanel.classList.toggle('active');
+                    menuPanel.setAttribute('aria-hidden', !isActive);
+                    trapFocus(menuPanel);
+                };
+            }
+
+            // Закрытие модального окна
+            function closeModal() {
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            // Ловушка фокуса для доступности
+            function trapFocus(element) {
+                const focusable = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                element.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (!e.shiftKey && document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                });
+
+                if (first) {
+                    first.focus();
+                }
+            }
+
+            // Переход по ссылкам в футере
+            const stats = document.querySelectorAll('.stat');
+            stats.forEach(stat => {
+                stat.addEventListener('click', () => {
+                    const url = stat.getAttribute('data-url');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
